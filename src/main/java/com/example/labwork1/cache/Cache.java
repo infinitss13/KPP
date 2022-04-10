@@ -20,7 +20,7 @@ public class Cache {
     public void add( Parametres params, Integer root) {
         if (!solutions.containsKey(params)) {
             solutions.put(params, root);
-            ProgramLogger.log(Level.INFO, "Value " + params + "@" + root + " added to cache!");
+            ProgramLogger.log(Level.INFO, "Value " + params + "@" + root + " added to the cache!");
         }
     }
 

@@ -19,6 +19,8 @@ public class Solution {
 
 
     Solution(){
+
+
         var context = new AnnotationConfigApplicationContext(SpringConfig.class);
         cache = context.getBean("cache", Cache.class);
     };
@@ -28,7 +30,7 @@ public class Solution {
 
         var temp = cache.find(parameters);
         if (temp != null) {
-            ProgramLogger.log(Level.WARN, "Value found in cache!");
+            ProgramLogger.log(Level.WARN, "Value is found in cache!");
             setRoot(temp);
 
             return;
