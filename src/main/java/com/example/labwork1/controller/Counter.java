@@ -15,6 +15,7 @@ public class Counter {
         ProgramLogger.log(Level.INFO, "Counter has been increased.");
     }
 
+
     @GetMapping("/calls")
     synchronized String showCalls() {
         return Counter.calls + "  Calls have been done";
