@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class Counter {
     static int calls = 0;
 
-    synchronized public void increasingCalls() {
+    synchronized void increasingCalls() {
         calls++;
+
         ProgramLogger.log(Level.INFO, "Counter has been increased.");
     }
 
-    @GetMapping("/serviceCalls")
-    synchronized public String showCalls() {
-        ProgramLogger.log(Level.INFO, "Calls mapping have been successfully done");
+    @GetMapping("/calls")
+    synchronized String showCalls() {
         return Counter.calls + "  Calls have been done";
     }
 }

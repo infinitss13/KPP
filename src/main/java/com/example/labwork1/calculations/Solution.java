@@ -19,8 +19,6 @@ public class Solution {
 
 
     Solution(){
-
-
         var context = new AnnotationConfigApplicationContext(SpringConfig.class);
         cache = context.getBean("cache", Cache.class);
     };
