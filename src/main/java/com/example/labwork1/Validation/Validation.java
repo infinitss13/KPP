@@ -12,7 +12,7 @@ public class Validation {
 
         }
 
-        
+
     }
     public static Integer parsing(String firstNumber, String secondNumber, String thirdNumber) {
         String message = "";

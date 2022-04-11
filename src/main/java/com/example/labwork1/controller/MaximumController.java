@@ -2,6 +2,7 @@ package com.example.labwork1.controller;
 
 
 import com.example.labwork1.calculations.Parametres;
+import com.example.labwork1.counter.RequestCounter;
 import lombok.AllArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
@@ -13,13 +14,14 @@ import com.example.labwork1.Validation.Validation;
 import com.example.labwork1.calculations.Solution;
 import org.springframework.http.HttpStatus;
 
+
 @ControllerAdvice
 @RestController
 @AllArgsConstructor
 public class MaximumController {
     private Solution solution;
-    Counter systemCalls = new Counter();
-    
+    RequestCounter requestCounter = new RequestCounter();
+
     @GetMapping("/maximum")
     public ResponseEntity<Object> maxIdentification(@RequestParam(value = "firstNumber", defaultValue = "0")String firstNumber,
                                                      @RequestParam(value = "secondNumber", defaultValue = "0")String secondNumber,
@@ -32,7 +34,8 @@ public class MaximumController {
             thirdNumberInt = Integer.parseInt(thirdNumber);
         }
         Parametres param = new Parametres(firstNumberInt, secondNumberInt, thirdNumberInt);
-        systemCalls.increasingCalls();
+        //systemCalls.increasingCalls();
+        requestCounter.increment();
         solution.calculateRoot(param);
 
 
