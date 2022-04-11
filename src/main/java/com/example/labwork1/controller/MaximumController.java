@@ -20,7 +20,7 @@ public class MaximumController {
     private Solution solution;
     Counter systemCalls = new Counter();
 
-    
+
 
     @GetMapping("/maximum")
     public ResponseEntity<Object> maxIdentification(@RequestParam(value = "firstNumber", defaultValue = "0")String firstNumber,

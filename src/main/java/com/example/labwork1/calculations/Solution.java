@@ -17,7 +17,7 @@ public class Solution {
     private Cache cache;
     private Integer root;
 
-
+    
     Solution(){
         var context = new AnnotationConfigApplicationContext(SpringConfig.class);
         cache = context.getBean("cache", Cache.class);
