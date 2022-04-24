@@ -61,24 +61,28 @@ public class MaximumController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<Object> calculateBulkParams(@RequestBody Integer Number) {
-//
-//        List<Integer> resultList = new LinkedList<>();
-//        bodyList.forEach((currentElement) -> {
-//            try {
-//                resultList.add(solution.calculateRoot(currentElement));
-//            } catch (CustomException e) {
-//                logger.error("Error in postMapping");
-//            }
-//        });
+    public ResponseEntity<Object> calculateBulkParams(@RequestBody String[] str) {
+
 
         logger.info("Successfully postMapping");
-        int number = solution.calculateSumOfResult(Number);
+        Operationable operation;
+        operation = (x,y,z) -> x+y+z;
+        int sum = operation.calculate(Integer.parseInt(str[0]), Integer.parseInt(str[1]), Integer.parseInt(str[2]));
+        int maxResult = solution.findMaxOfResult(str);
+        int minResult = solution.findMinOfResult(str);
+        int[] filter = solution.filter_100(str);
+        return new ResponseEntity<>("\nSum: " + sum + "\nMax result: " +
+               maxResult + "\nMin result: " + minResult, HttpStatus.OK);
 
-        return ResponseEntity.ok(solution.calculateSumOfResult(Number));
 
 
     }
+
+    interface Operationable{
+        int calculate(int x, int y, int z);
+    }
+
+
 }
 
 

@@ -9,6 +9,13 @@ import org.jetbrains.annotations.Nullable;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+
+
+import org.apache.logging.log4j.Level;
+import java.util.stream.Collector;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 import java.util.List;
 
 @Service
@@ -54,27 +61,38 @@ public class Solution {
         this.root = root;
     }
 
-    public int calculateSumOfResult(Integer number) {
+    public int calculateSumOfResult(Integer myOwnNumber) {
         int sum = 0;
-        sum = number;
+        sum = myOwnNumber;
         return sum;
 
     }
+    public static int findSum (String[] arr){
+        int sum = Stream.of(arr).mapToInt(Integer::parseInt).sum();
 
-//    public int findMinOfResult(List<Integer> resultList) {
-//        int min = 0;
-//        if (!resultList.isEmpty()) {
-//            min = resultList.stream().mapToInt(Integer::intValue).min().getAsInt();
-//        }
-//        return min;
-//    }
-//
-//    public int findMaxOfResult(List<Integer> resultList) {
-//        int max = 0;
-//        if (!resultList.isEmpty()) {
-//            max = resultList.stream().mapToInt(Integer::intValue).max().getAsInt();
-//        }
-//        return max;
-//    }
+
+        return sum;
+        //
+    }
+    public static int[] filter_100(String[] arr){
+
+        IntStream stream = Stream.of(arr).mapToInt(Integer::parseInt);
+        return stream.filter(i -> i < 100).toArray();
+    }
+    public int findMinOfResult(String[] arr) {
+        int min = 0;
+
+            min = Stream.of(arr).mapToInt(Integer::parseInt).min().getAsInt();
+
+        return min;
+    }
+
+    public int findMaxOfResult(String[] arr) {
+        int max = 0;
+
+            max = Stream.of(arr).mapToInt(Integer::parseInt).max().getAsInt();
+
+        return max;
+    }
 
 }
