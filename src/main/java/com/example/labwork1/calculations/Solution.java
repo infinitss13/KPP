@@ -74,11 +74,7 @@ public class Solution {
         return sum;
         //
     }
-    public static int[] filter_100(String[] arr){
 
-        IntStream stream = Stream.of(arr).mapToInt(Integer::parseInt);
-        return stream.filter(i -> i < 100).toArray();
-    }
     public int findMinOfResult(String[] arr) {
         int min = 0;
 

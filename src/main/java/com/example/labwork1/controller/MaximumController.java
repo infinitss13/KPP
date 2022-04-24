@@ -70,7 +70,7 @@ public class MaximumController {
         int sum = operation.calculate(Integer.parseInt(str[0]), Integer.parseInt(str[1]), Integer.parseInt(str[2]));
         int maxResult = solution.findMaxOfResult(str);
         int minResult = solution.findMinOfResult(str);
-        int[] filter = solution.filter_100(str);
+
         return new ResponseEntity<>("\nSum: " + sum + "\nMax result: " +
                maxResult + "\nMin result: " + minResult, HttpStatus.OK);
 
