@@ -13,6 +13,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler(CustomException.class)
     public ResponseEntity<Object> handleException(@NotNull CustomException e) {
         logger.error("ERROR CODE 400", e);
+
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 

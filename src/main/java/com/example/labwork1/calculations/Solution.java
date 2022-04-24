@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 
@@ -24,14 +25,14 @@ public class Solution {
     };
 
 
-    public void calculateRoot(Parametres parameters) {
+    public int calculateRoot(Parametres parameters) {
 
         var temp = cache.find(parameters);
         if (temp != null) {
             ProgramLogger.log(Level.WARN, "Value is found in cache!");
             setRoot(temp);
 
-            return;
+            return temp;
         }
         System.out.println(parameters.firstValue());
         if ((parameters.firstValue() >= parameters.secondValue()) && (parameters.firstValue()>= parameters.thirdValue()))
@@ -42,7 +43,7 @@ public class Solution {
             temp = parameters.thirdValue();
         setRoot(temp);
         cache.add(parameters, root);
-
+        return temp;
     }
 
     public Integer getRoot() {
@@ -52,5 +53,28 @@ public class Solution {
     public void setRoot(Integer root) {
         this.root = root;
     }
+
+    public int calculateSumOfResult(Integer number) {
+        int sum = 0;
+        sum = number;
+        return sum;
+
+    }
+
+//    public int findMinOfResult(List<Integer> resultList) {
+//        int min = 0;
+//        if (!resultList.isEmpty()) {
+//            min = resultList.stream().mapToInt(Integer::intValue).min().getAsInt();
+//        }
+//        return min;
+//    }
+//
+//    public int findMaxOfResult(List<Integer> resultList) {
+//        int max = 0;
+//        if (!resultList.isEmpty()) {
+//            max = resultList.stream().mapToInt(Integer::intValue).max().getAsInt();
+//        }
+//        return max;
+//    }
 
 }

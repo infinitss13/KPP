@@ -3,17 +3,31 @@ package com.example.labwork1.controller;
 
 import com.example.labwork1.calculations.Parametres;
 import com.example.labwork1.counter.RequestCounter;
+
 import lombok.AllArgsConstructor;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+
+import com.example.labwork1.customException.CustomException;
+
+import org.jetbrains.annotations.NotNull;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.example.labwork1.customException.CustomException;
 import com.example.labwork1.Validation.Validation;
 import com.example.labwork1.calculations.Solution;
 import org.springframework.http.HttpStatus;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @ControllerAdvice
 @RestController
@@ -21,13 +35,14 @@ import org.springframework.http.HttpStatus;
 public class MaximumController {
     private Solution solution;
     RequestCounter requestCounter = new RequestCounter();
+    private static final Logger logger = LogManager.getLogger(MaximumController.class);
 
     @GetMapping("/maximum")
-    public ResponseEntity<Object> maxIdentification(@RequestParam(value = "firstNumber", defaultValue = "0")String firstNumber,
-                                                     @RequestParam(value = "secondNumber", defaultValue = "0")String secondNumber,
-                                                     @RequestParam(value = "thirdNumber", defaultValue = "0")String thirdNumber) throws CustomException{
+    public ResponseEntity<Object> maxIdentification(@RequestParam(value = "firstNumber", defaultValue = "0") String firstNumber,
+                                                    @RequestParam(value = "secondNumber", defaultValue = "0") String secondNumber,
+                                                    @RequestParam(value = "thirdNumber", defaultValue = "0") String thirdNumber) throws CustomException {
 
-        Integer firstNumberInt=0,secondNumberInt=0,thirdNumberInt=0;
+        Integer firstNumberInt = 0, secondNumberInt = 0, thirdNumberInt = 0;
         if (Validation.parsing(firstNumber, secondNumber, thirdNumber) == 3) {
             firstNumberInt = Integer.parseInt(firstNumber);
             secondNumberInt = Integer.parseInt(secondNumber);
@@ -39,10 +54,31 @@ public class MaximumController {
         solution.calculateRoot(param);
 
 
-
         return new ResponseEntity<>(solution.getRoot(), HttpStatus.OK);
     }
 
+    @PostMapping(value = "/input",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+
+    public ResponseEntity<Object> calculateBulkParams(@RequestBody Integer Number) {
+//
+//        List<Integer> resultList = new LinkedList<>();
+//        bodyList.forEach((currentElement) -> {
+//            try {
+//                resultList.add(solution.calculateRoot(currentElement));
+//            } catch (CustomException e) {
+//                logger.error("Error in postMapping");
+//            }
+//        });
+
+        logger.info("Successfully postMapping");
+        int number = solution.calculateSumOfResult(Number);
+
+        return ResponseEntity.ok(solution.calculateSumOfResult(Number));
+
+
+    }
 }
 
 
